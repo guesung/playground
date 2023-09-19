@@ -14,17 +14,23 @@ const CheckboxContext = React.createContext<CheckboxContextProps>({
   onChange: () => {},
 });
 
-const CheckboxWrapper = ({
-  id,
-  isChecked,
-  onChange,
-  children,
-}: CheckboxProps) => {
+interface CheckboxWrapperProps {
+  id: string;
+  children: React.ReactNode;
+}
+
+const CheckboxWrapper = ({ id, children }: CheckboxWrapperProps) => {
+  const [isChecked, setIsChecked] = React.useState(false);
+  const onChange = React.useCallback(
+    () => setIsChecked((isChecked) => !isChecked),
+    []
+  );
   const value = {
     id,
     isChecked,
     onChange,
   };
+
   return (
     <CheckboxContext.Provider value={value}>
       {children}
