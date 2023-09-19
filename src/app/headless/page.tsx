@@ -2,9 +2,11 @@
 import CheckboxHeadless from "@/app/headless/components/CheckboxHeadless";
 import { useState } from "react";
 import CheckboxWrapper from "./components/CheckboxWrapper";
+import { useCheckbox } from "./hooks/useCheckbox";
 
 export default function page() {
   const [isChecked, setIsChecked] = useState(false);
+  const { isChecked: isCheckedHook, onChange: onChangeHook } = useCheckbox();
 
   return (
     <div>
@@ -27,6 +29,15 @@ export default function page() {
         <CheckboxWrapper.Checkbox />
         <CheckboxWrapper.Label>체크박스 만들기</CheckboxWrapper.Label>
       </CheckboxWrapper>
+
+      <label>
+        <input
+          type="checkbox"
+          checked={isCheckedHook}
+          onChange={onChangeHook}
+        />
+        <span>체크박스 만들기</span>
+      </label>
     </div>
   );
 }
